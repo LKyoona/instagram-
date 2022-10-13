@@ -7,7 +7,8 @@
 别忘了！ 别忘了！
 如果想要切换爬取的对象，需要打开开发者工具获取用户名参数和id参数
 
-
+这是作者爬出来的效果图如下部分图片尺度太大，我打个码，不建议吧![%)RK8(`~{5PA(@43ARLWE_I](https://user-images.githubusercontent.com/65445818/195665520-5e65ffad-89e3-4912-a6f8-290245f7b63e.png)
+![image](https://user-images.githubusercontent.com/65445818/195665992-a08bb748-0477-4a5a-9045-1029159ce189.png)
 
 
 
