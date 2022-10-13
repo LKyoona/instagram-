@@ -73,7 +73,7 @@ def parse_pages(next_page, num=1):
                 print(f'爬完了第{num}页!')
             except Exception as e:
                 print(e)  # 遇到反爬
-                save_img(Img_list)  # 反复调用 想阻止我爬图！ 你休想！
+                save_img(Img_list)  #嗯？  想阻止我爬图片！ 你休想！
 
         save_img(Img_list)
     return parse_pages(next_page, num)  # 实现自动翻页自己调用自己 出口也就是翻页的最后一页
