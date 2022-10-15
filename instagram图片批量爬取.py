@@ -38,7 +38,7 @@ Lock = threading.Lock()
 
 # 第一页
 def parse_pages(next_page, num=1):
-    '''id参数在这个函数里面referer请求头里'''
+    '''id参数在这个函数里面url里'''
     if num == 3:  # 设置截止页码
         return num
     else:
