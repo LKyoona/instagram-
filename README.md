@@ -17,6 +17,11 @@
 ### tips:代码若是失效了，就考虑换一下cookie吧！
 ***
 
-# 如遇问题欢迎可以向作者提问 可以联系作者~
+# 如遇问题欢迎可以添加作者QQ号向我提问~
 
-![image](https://user-images.githubusercontent.com/65445818/197403576-f135eda8-1ede-49cb-b6a0-6cb5b63e4031.png)
+![image](https://user-images.githubusercontent.com/65445818/197403647-4dcce056-983d-4197-a870-a3ffcfae5431.png)
+
+## 写代码不容易,要是觉得写的不错，给作者打个赏再走吧,嘻嘻(#^.^#),谢谢各位爷的打赏
+![image](https://user-images.githubusercontent.com/65445818/197403808-7fa11ff0-c5e5-49ae-8498-dea28380f996.png)
+
+
