@@ -30,8 +30,32 @@ def ins_first(User_name):
     }
     json_data = requests.get(url=url, headers=headers, params=params).json()
     end_cursor = json_data['data']['user']['edge_owner_to_timeline_media']['page_info']['end_cursor']
-    return end_cursor
+    img_list = json_data['data']['user']['edge_owner_to_timeline_media']['edges']  # 获取到12个图片详情地址
+    Img_list = []
+    print(requests.get(url=url, headers=headers, verify=False).url)
+    for img_data in img_list:
+        if 'edge_sidecar_to_children' in img_data['node'].keys():
+            for img in img_data['node']['edge_sidecar_to_children']['edges']:
+                Img_list.append(img['node']['display_url'])
+        else:
+            Img_list.append(img_data['node']['display_url'])
 
+    def save_img(Img_list):
+        try:
+            for img_url in Img_list:
+                data = requests.get(url=img_url, headers=headers, verify=False).content
+                title = re.findall('(.*)_n.jpg\?', img_url.split('/')[5])[0]
+                Lock.acquire()
+                with open(title + '.jpg', 'wb') as f:
+                    f.write(data)
+                Lock.release()
+            print(f'爬完了第1页!')
+        except Exception as e:
+            print(e)  # 遇到反爬
+            save_img(Img_list)  # 反复调用 想阻止我爬图！ 你休想！
+
+    save_img(Img_list)
+    return end_cursor
 
 Lock = threading.Lock()
 
