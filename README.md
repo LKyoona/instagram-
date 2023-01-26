@@ -21,7 +21,4 @@
 
 ![image](https://user-images.githubusercontent.com/65445818/197403647-4dcce056-983d-4197-a870-a3ffcfae5431.png)
 
-## 写代码不容易,要是觉得写的不错，给作者打个赏再走吧,嘻嘻(#^.^#)，谢谢各位爷的打赏
-![image](https://user-images.githubusercontent.com/65445818/197403808-7fa11ff0-c5e5-49ae-8498-dea28380f996.png)
-
 
