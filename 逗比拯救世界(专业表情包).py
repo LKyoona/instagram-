@@ -18,9 +18,11 @@ for i in range(int(times)):
     response = requests.get(url=url, headers=headers).json()
     for data in response:
         img_url = 'https://image.dbbqb.com/' + data['path']
+        img_data_type = requests.get(url=img_url).headers
+        img_type = '.' + img_data_type['Content-Type'].split('/')[-1]
         img_data = requests.get(url=img_url).content
         title = img_url.split('/')[-1]
-        f = open('逗比图库\\' + title + '.jpg', 'wb')
+        f = open('逗比图库\\' + title + img_type, 'wb')
         f.write(img_data)
         f.close()
-        print('---' + title + '已写入逗比图库---')
+        print('---' + title + img_type + '已写入逗比图库---')
