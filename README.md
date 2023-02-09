@@ -19,8 +19,4 @@
 
 # 如遇问题欢迎可以添加作者QQ号向我提问~
 
-![image](https://user-images.githubusercontent.com/65445818/217779881-b78d5816-015b-4ea4-86a4-2db4f16d2fb6.png)
-
-
-
-
+![Uploading QQ截图20230209180507.png…]()
