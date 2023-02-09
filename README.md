@@ -19,4 +19,4 @@
 
 # 如遇问题欢迎可以添加作者QQ号向我提问~
 
-![QQ截图20230209180507](https://user-images.githubusercontent.com/65445818/217781908-c851009b-bbaa-4fa1-884d-c10b0cd145e0.png)
+![image](https://user-images.githubusercontent.com/65445818/217781908-c851009b-bbaa-4fa1-884d-c10b0cd145e0.png)
