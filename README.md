@@ -19,7 +19,7 @@
 
 # 如遇问题欢迎可以添加作者QQ号向我提问~
 
-!(https://user-images.githubusercontent.com/65445818/217779881-b78d5816-015b-4ea4-86a4-2db4f16d2fb6.png)
+![image](https://user-images.githubusercontent.com/65445818/217779881-b78d5816-015b-4ea4-86a4-2db4f16d2fb6.png)
 
 
 
