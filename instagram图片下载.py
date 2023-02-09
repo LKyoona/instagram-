@@ -46,7 +46,7 @@ def ins_first(User_name):
         try:
             for img_url in Img_list:
                 data = requests.get(url=img_url, headers=headers, verify=False).content
-                title = re.findall('(.*)_n.jpg\?', img_url.split('/')[5])[0]
+                title = re.findall('(.*)_n.*?\?stp=', img_url.split('/')[5])[0]
                 Lock.acquire()
                 with open(title + '.jpg', 'wb') as f:
                     f.write(data)
@@ -93,7 +93,7 @@ def parse_pages(next_page, num=1):
             try:
                 for img_url in Img_list:
                     data = requests.get(url=img_url, headers=headers, verify=False).content
-                    title = re.findall('(.*)_n.jpg\?', img_url.split('/')[5])[0]
+                    title = re.findall('(.*)_n.*?\?stp=', img_url.split('/')[5])[0]
                     Lock.acquire()
                     with open(title + '.jpg', 'wb') as f:
                         f.write(data)
