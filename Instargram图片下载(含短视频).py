@@ -1,10 +1,8 @@
 import re
-import threading
 from pprint import pprint
 
 import requests
 import time
-import concurrent.futures
 import os
 from config import Username, USER_NAME, USER_ID, COOKIES, END_PAGE
 from config import X_CSRF_TOKEN, x_ig_www_claim, x_instagram_ajax
@@ -21,7 +19,8 @@ finally:
 def ins_first(User_name):
     '''第一页'''
     url = 'https://i.instagram.com/api/v1/users/web_profile_info/'
-    params = {'username': User_name}  # 传入从开发者工具获取到的用户名
+    # 传入从开发者工具获取到的用户名
+    params = {'username': User_name}
     headers = {
         'cookie': COOKIES,
         'referer': f'https://www.instagram.com/{User_name}/',
@@ -57,34 +56,30 @@ def ins_first(User_name):
                     data = requests.get(url=video_url, headers=headers, verify=False).content
                     title = re.findall('(.*)_n.mp4\?', video_url.split('/')[5])[0]
                     print(title)
-                    Lock.acquire()
                     with open(title + '.mp4', 'wb') as f:
                         f.write(data)
-                    Lock.release()
             for img_url in Img_list:
                 data = requests.get(url=img_url, headers=headers, verify=False).content
                 title = re.findall('(.*)_n.*?\?stp=', img_url.split('/')[5])[0]
                 print(title)
-                Lock.acquire()
                 with open(title + '.jpg', 'wb') as f:
                     f.write(data)
-                Lock.release()
             print(f'爬完了第1页!')
         except Exception as e:
-            print(e)  # 遇到反爬
-            save_img(Video_List)  # 反复调用 想阻止我爬图！ 你休想！
+            # 遇到反爬
+            print(e)
+            # 反复调用 想阻止我爬图！ 你休想！
+            save_img(Video_List)
 
     print(save_img(Video_List))
     return end_cursor
 
 
-Lock = threading.Lock()
-
-
 # 第一页
 def parse_pages(next_page, num=1):
     '''id参数在这个函数里面url里'''
-    if num == END_PAGE:  # 设置截止页码
+    # 设置截止页码
+    if num == END_PAGE:
         return num
     else:
         headers = {
@@ -97,7 +92,8 @@ def parse_pages(next_page, num=1):
         json_data = requests.get(url=url, headers=headers, verify=False).json()
         next_page = json_data['data']['user']['edge_owner_to_timeline_media']['page_info']['end_cursor']  # 查询下一页参数
         num += 1
-        img_list = json_data['data']['user']['edge_owner_to_timeline_media']['edges']  # 获取到12个图片详情地址
+        # 获取图片详情地址
+        img_list = json_data['data']['user']['edge_owner_to_timeline_media']['edges']
         print(requests.get(url=url, headers=headers, verify=False).status_code)
         Img_list = []
         Video_List = []
@@ -120,39 +116,36 @@ def parse_pages(next_page, num=1):
                         data = requests.get(url=video_url, headers=headers, verify=False).content
                         title = re.findall('(.*)_n.mp4\?', video_url.split('/')[5])[0]
                         print(title)
-                        Lock.acquire()
                         with open(title + '.mp4', 'wb') as f:
                             f.write(data)
-                        Lock.release()
                 for img_url in Img_list:
                     data = requests.get(url=img_url, headers=headers, verify=False).content
-                    title = re.findall('(.*)_n.*?\?stp=', img_url.split('/')[5])[0]
+                    title = re.findall('(.*)_n.*\?stp=', img_url.split('/')[5])[0]
                     print(title)
-                    Lock.acquire()
                     with open(title + '.jpg', 'wb') as f:
                         f.write(data)
-                    Lock.release()
                 print(f'爬完了第{num}页!')
             except Exception as e:
-                print(e)  # 遇到反爬
-                save_img(Img_list, Video_List)  # 反复调用 想阻止我爬图！ 你休想！
+                # 遇到反爬
+                print(e)
+                # 反复调用 想阻止我爬图！ 你休想！
+                save_img(Img_list, Video_List)
 
         save_img(Img_list, Video_List)
-    return parse_pages(next_page, num)  # 实现自动翻页自己调用自己 出口也就是翻页的最后一页
+        # 实现自动翻页自己调用自己 出口也就是翻页的最后一页
+    return parse_pages(next_page, num)
 
 
 def main():
     '''第一个函数用于查参数'''
-    global User_name
-    User_name = USER_NAME
     end_cursor = ins_first(User_name)
     # 出口
     parse_pages(end_cursor)
 
 
 if __name__ == '__main__':
+    User_name = USER_NAME
     start = time.time()
-    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-        executor.submit(main)
+    main()
     print('爬完了！')
     print('花费了时间:%d秒' % (time.time() - start))
