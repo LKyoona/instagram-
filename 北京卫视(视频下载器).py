@@ -1,4 +1,5 @@
 import re
+import subprocess
 import tkinter as tk
 import tkinter.messagebox
 import requests
@@ -6,6 +7,7 @@ from tkinter.filedialog import askdirectory
 import os
 
 
+# 下载视频
 def down_load():
     try:
         url = video_url.get()
@@ -38,17 +40,22 @@ def exit_():
         root.quit()
 
 
-def clear_entry():  # 取消录入
+# 刷新
+def clear_entry():
     video_url.set('')
 
 
+# 设置下载路径
 def selectPath():
     try:
-        path_ = askdirectory()  # 使用askdirectory()方法返回文件夹的路径
+        # 使用askdirectory()方法返回文件夹的路径
+        path_ = askdirectory()
         if path_ == "":
-            path.get()  # 当打开文件路径选择框后点击"取消" 输入框会清空路径，所以使用get()方法再获取一次路径
+            # 当打开文件路径选择框后点击"取消" 输入框会清空路径，所以使用get()方法再获取一次路径
+            path.get()
         else:
-            path_ = path_.replace("/", "\\")  # 实际在代码中执行的路径为“\“ 所以替换一下
+            # 实际在代码中执行的路径为“\“ 所以替换一下
+            path_ = path_.replace("/", "\\")
             path.set(path_)
         os.chdir(path_)
         print('默认下载地址已更换为', os.getcwd())
@@ -56,12 +63,27 @@ def selectPath():
         pass
 
 
+# 打开路径位置
 def openPath():
     try:
         dir = os.path.dirname(path.get() + "\\")
-        os.system('start ' + dir)
+        import subprocess
+        subprocess.Popen(f"explorer.exe {dir}", stdin=-1, stdout=-1, stderr=-1)
+
     except:
         pass
+
+
+def func1(event):
+    """当鼠标点击entry2时，清除掉默认值"""
+    if Entry2.get() == '请将视频地址粘贴至此处':
+        Entry2.delete('0', 'end')  # 做这个判断，是为了避免清除用户自己输入的数据
+
+
+def func2(event):
+    """当鼠标点击其它位置时，如果entry2为空，则插入默认值"""
+    if Entry2.get() == '':
+        Entry2.insert('0', '请将视频地址粘贴至此处')  # 做这个判断，同样是为了避免影响用户自己输入的数据
 
 
 if __name__ == '__main__':
@@ -75,21 +97,31 @@ if __name__ == '__main__':
     y = screen_height / 2 - height / 2
     size = f'{width}x{height}+{int(x)}+{int(y)}'
     root.geometry(size)
+    root.resizable(width=False, height=False)
     root.iconbitmap("BRTV.ico")
     root.attributes("-alpha", 0.9)
     font = ('华文行楷', 16)
     tk.Label(root, text='请输入视频地址:', font=font, height=3).grid(row=1, column=1)
     video_url = tk.StringVar()
-    video_url.set('请将视频地址粘贴至此处')
-    tk.Entry(root, textvariable=video_url, width=45).grid(row=1, column=2)
+    video_url.set('请将视频地址粘贴至此处', )
+    Entry2 = tk.Entry(root, textvariable=video_url, fg='#5D5A58', width=45)
+    Entry2.bind('<Button-1>', func1)
+    Entry2.grid(row=1, column=2)
     path = tk.StringVar()
     path.set(os.path.abspath("."))
     tk.Label(root, font=font, text="目标路径:").grid(row=2, column=1)
-    tk.Entry(root, textvariable=path, width=45, state="readonly").grid(row=2, column=2)
+    # 将鼠标左键点击事件和func2绑定到entry1上，即点击entry1则调用func2
+    Entry1 = tk.Entry(root, textvariable=path, width=45, state="readonly")
+    Entry1.bind('<Button-1>', func2)
+    Entry1.grid(row=2, column=2)
     tk.Label(root, text='仅限下载https://www.btime.com/btv的视频（@Klcok）').place(x=185, y=170)
     btnSubmit_entry = tk.Button(root, text='下载视频', command=down_load, relief="groove", bd=8).place(x=30, y=125)
     btnCancel_entry = tk.Button(root, text='退出程序', command=exit_, relief="groove", bd=8).place(x=130, y=125)
-    path_select = tk.Button(root, text="路径选择", command=selectPath, relief="groove", bd=8).place(x=230, y=125)
-    open_file = tk.Button(root, text="打开文件位置", command=openPath, relief="groove", bd=8).place(x=330, y=125)
     fresh = tk.Button(root, text='刷新', command=clear_entry, relief="raised", bd=6).place(x=450, y=125)
+    path_select = tk.Button(root, text="路径选择", command=selectPath, relief="groove", bd=8)
+    open_file = tk.Button(root, text="打开文件位置", command=openPath, relief="groove", bd=8)
+    path_select.bind('<Button-1>', func2)
+    open_file.bind('<Button-1>', func2)
+    path_select.place(x=230, y=125)
+    open_file.place(x=330, y=125)
     root.mainloop()
