@@ -2,9 +2,16 @@ import re
 import subprocess
 import tkinter as tk
 import tkinter.messagebox
+import webbrowser
+
 import requests
 from tkinter.filedialog import askdirectory
 import os
+
+
+# 此处必须注意，绑定的事件函数中必须要包含event参数
+def open_url(event):
+    webbrowser.open("https://www.btime.com/btv", new=0)
 
 
 # 下载视频
@@ -114,7 +121,11 @@ if __name__ == '__main__':
     Entry1 = tk.Entry(root, textvariable=path, width=45, state="readonly")
     Entry1.bind('<Button-1>', func2)
     Entry1.grid(row=2, column=2)
-    tk.Label(root, text='仅限下载https://www.btime.com/btv的视频（@Klcok）').place(x=185, y=170)
+    link = tk.Label(root, text='仅限下载https://www.btime.com/btv的视频（@Klcok）', fg='#E54242')
+    link.config(font=("微软雅黑", 9, "underline"))
+    # 绑定label单击时间
+    link.bind("<Button-1>", open_url)
+    link.place(x=185, y=170)
     btnSubmit_entry = tk.Button(root, text='下载视频', command=down_load, relief="groove", bd=8).place(x=30, y=125)
     btnCancel_entry = tk.Button(root, text='退出程序', command=exit_, relief="groove", bd=8).place(x=130, y=125)
     fresh = tk.Button(root, text='刷新', command=clear_entry, relief="raised", bd=6).place(x=450, y=125)
