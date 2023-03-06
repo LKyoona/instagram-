@@ -3,6 +3,7 @@ import subprocess
 import tkinter as tk
 import tkinter.messagebox
 import webbrowser
+from functools import partial
 
 import requests
 from tkinter.filedialog import askdirectory
@@ -91,8 +92,9 @@ def func2(event):
     """当鼠标点击其它位置时，如果entry2为空，则插入默认值"""
     if Entry2.get() == '':
         Entry2.insert('0', '请将视频地址粘贴至此处')  # 做这个判断，同样是为了避免影响用户自己输入的数据
-
-
+#变色
+def color_config(widget, color, event):
+    widget.configure(foreground=color)
 if __name__ == '__main__':
     root = tk.Tk()
     root.title('BRTV视频下载器')
@@ -121,11 +123,13 @@ if __name__ == '__main__':
     Entry1 = tk.Entry(root, textvariable=path, width=45, state="readonly")
     Entry1.bind('<Button-1>', func2)
     Entry1.grid(row=2, column=2)
-    link = tk.Label(root, text='仅限下载https://www.btime.com/btv的视频（@Klcok）', fg='#E54242')
+    link = tk.Label(root, text='仅限下载https://www.btime.com/btv的视频（@Klcok）', fg='red')
     link.config(font=("微软雅黑", 9, "underline"))
     # 绑定label单击时间
     link.bind("<Button-1>", open_url)
     link.place(x=185, y=170)
+    link.bind("<Enter>", partial(color_config, link, "blue"))
+    link.bind("<Leave>", partial(color_config, link, "red"))
     btnSubmit_entry = tk.Button(root, text='下载视频', command=down_load, relief="groove", bd=8).place(x=30, y=125)
     btnCancel_entry = tk.Button(root, text='退出程序', command=exit_, relief="groove", bd=8).place(x=130, y=125)
     fresh = tk.Button(root, text='刷新', command=clear_entry, relief="raised", bd=6).place(x=450, y=125)
