@@ -24,7 +24,7 @@ def down_load():
             name = url.split('/')[-1]
             url = 'https://app.api.btime.com/video/play?id=' + name
             h = {
-                'cookie': '__guid=ddf677be-b8a2-11ed-a059-6c92bf0ad279; sajssdk_2015_cross_new_user=1; sensorsdata2015jssdkcross=%7B%22distinct_id%22%3A%22186a02c84e34-0f75ebe9ce6a55-74525471-1327104-186a02c84e4a4%22%2C%22first_id%22%3A%22%22%2C%22props%22%3A%7B%22%24latest_traffic_source_type%22%3A%22%E5%BC%95%E8%8D%90%E6%B5%81%E9%87%8F%22%2C%22%24latest_search_keyword%22%3A%22%E6%9C%AA%E5%8F%96%E5%88%B0%E5%80%BC%22%2C%22%24latest_referrer%22%3A%22https%3A%2F%2Fwww.msn.cn%2F%22%7D%2C%22%24device_id%22%3A%22186a02c84e34-0f75ebe9ce6a55-74525471-1327104-186a02c84e4a4%22%7D; __lid=; usid=41f1d567b063469e793d71da7ae97e7b; __DC_gid=196757375.14410235.1677724517741.1677725282094.5; z_api_request_time=0.0014519691467285',
+                'cookie': 'F12开发者工具复制自己的cookies'
                 'referer': 'https://item.btime.com/',
                 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.57',
             }
