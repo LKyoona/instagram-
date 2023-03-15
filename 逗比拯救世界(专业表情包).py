@@ -9,7 +9,7 @@ times = input('请输入下载数量单位(百):')
 for i in range(int(times)):
     url = 'https://www.dbbqb.com/api/search/json?size=100'
     headers = {
-        'Cookie': '_vc=96182aba-36d0-4375-82d6-785c1c27437f',
+        'Cookie': 'F12开发者工具复制自己的cookies',
         'Host': 'www.dbbqb.com',
         'Referer': 'https://www.dbbqb.com/',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36 Edg/109.0.1518.61',
