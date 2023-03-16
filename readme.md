@@ -13,6 +13,6 @@
 
 
 # 如果要是遇到了问题,可以扫下方二维码，欢迎添加我的联系方式与我进行探讨~~~~
-## 本项目已打包为可执行文件,客官请这边走 | [蓝奏云]([https://www.btime.com/btv](https://wwsd.lanzoue.com/i0ZeC0q8enah)) 
+## 本项目已打包为可执行文件 | [蓝奏云](https://wwsd.lanzoue.com/i0ZeC0q8enah) 
 
 ![image](https://user-images.githubusercontent.com/65445818/217781908-c851009b-bbaa-4fa1-884d-c10b0cd145e0.png)
