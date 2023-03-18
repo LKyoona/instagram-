@@ -8,9 +8,6 @@ import concurrent.futures
 
 if not os.path.exists('img'):
     os.mkdir('img')
-with open('ALL_DATA.json', 'r', encoding='utf-8') as f:
-    ALL_DATA = json.loads(f.read())
-
 
 def send_requests(url):
     bit = requests.get(url=url).content
@@ -67,10 +64,4 @@ if __name__ == '__main__':
             skin_name = skins[i - 1]
             skin_url = f'https://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/{id}/{id}-mobileskin-{i}.jpg'
             ALL_DATA.append({'英雄名': hero_name, '皮肤名': skin_name, 'url': skin_url})
-    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
-        for data in ALL_DATA:
-            hero = data['英雄名']
-            skin = data['皮肤名']
-            url = data['url']
-            executor.submit(main, hero, skin, url)
-    print('花费了' + str(round(time.time() - T1, 2)) + '秒')
+    with 
